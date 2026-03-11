@@ -3,21 +3,23 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Nordintel Karaoke | Karaoke for arrangement i Bodø</title>
-  <meta name="description" content="Nordintel Karaoke tilbyr enkel og stemningsfull karaoke for arrangement, skolekvelder og lokale events i Bodø." />
+  <title>Nordintel Karaoke Stand | Syng på standen vår</title>
+  <meta name="description" content="En enkel karaoke-nettside for Nordintel sin stand. Velg sang, skriv navn og syng sammen med oss på standen." />
   <style>
     :root {
       --primary: #0a2e5c;
       --accent: #4fb6e9;
       --accent-soft: #dff5ff;
       --bg: #f4f9ff;
-      --text: #0f1f33;
-      --muted: #5e7086;
-      --card: rgba(255,255,255,0.88);
+      --text: #102038;
+      --muted: #5b6f87;
+      --card: rgba(255,255,255,0.92);
       --border: rgba(10,46,92,0.10);
-      --shadow: 0 18px 40px rgba(10,46,92,0.12);
-      --radius: 22px;
-      --max: 1120px;
+      --shadow: 0 18px 40px rgba(10,46,92,0.10);
+      --radius: 24px;
+      --max: 1150px;
+      --success: #0f9d71;
+      --danger: #c13f3f;
     }
 
     * { box-sizing: border-box; }
@@ -25,13 +27,13 @@
     body {
       margin: 0;
       font-family: Inter, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-      background: linear-gradient(180deg, #f7fbff 0%, #ebf5ff 100%);
       color: var(--text);
+      background: linear-gradient(180deg, #f8fbff 0%, #ebf4ff 100%);
       line-height: 1.6;
     }
 
-    img { max-width: 100%; display: block; }
-    a { color: inherit; }
+    img, video, iframe { max-width: 100%; }
+    button, input, select { font: inherit; }
 
     .container {
       width: min(100% - 32px, var(--max));
@@ -42,7 +44,7 @@
       position: sticky;
       top: 0;
       z-index: 100;
-      background: rgba(255,255,255,0.82);
+      background: rgba(255,255,255,0.84);
       backdrop-filter: blur(12px);
       border-bottom: 1px solid var(--border);
     }
@@ -51,7 +53,7 @@
       display: flex;
       align-items: center;
       justify-content: space-between;
-      gap: 20px;
+      gap: 16px;
       padding: 14px 0;
     }
 
@@ -60,46 +62,35 @@
       align-items: center;
       gap: 12px;
       text-decoration: none;
-      font-weight: 800;
       color: var(--primary);
+      font-weight: 800;
     }
 
     .brand-mark {
-      width: 42px;
-      height: 42px;
+      width: 44px;
+      height: 44px;
       border-radius: 14px;
       display: grid;
       place-items: center;
-      color: white;
       background: linear-gradient(135deg, var(--primary), var(--accent));
-      box-shadow: 0 10px 24px rgba(79,182,233,0.28);
-      font-size: 1.1rem;
-    }
-
-    .nav-toggle {
-      display: none;
-      border: 1px solid var(--border);
-      background: white;
-      color: var(--primary);
-      border-radius: 12px;
-      padding: 10px 12px;
-      font-weight: 700;
-      cursor: pointer;
+      color: white;
+      box-shadow: 0 10px 24px rgba(79,182,233,0.30);
+      font-size: 1.2rem;
     }
 
     .nav-list {
       display: flex;
-      align-items: center;
-      gap: 20px;
       list-style: none;
-      margin: 0;
       padding: 0;
+      margin: 0;
+      gap: 18px;
+      align-items: center;
     }
 
     .nav-list a {
       text-decoration: none;
       color: var(--primary);
-      font-weight: 600;
+      font-weight: 700;
       white-space: nowrap;
     }
 
@@ -109,38 +100,44 @@
       display: inline-flex;
       align-items: center;
       justify-content: center;
+      gap: 8px;
       padding: 13px 18px;
-      border-radius: 14px;
-      text-decoration: none;
       border: none;
+      border-radius: 14px;
       cursor: pointer;
+      text-decoration: none;
       font-weight: 800;
-      transition: transform .2s ease, box-shadow .2s ease;
-      background: linear-gradient(135deg, var(--accent), #7bd2f4);
       color: white;
-      box-shadow: 0 12px 28px rgba(79,182,233,0.28);
+      background: linear-gradient(135deg, var(--accent), #7dd4f5);
+      box-shadow: 0 12px 28px rgba(79,182,233,0.26);
+      transition: transform .2s ease, box-shadow .2s ease;
     }
 
     .btn:hover { transform: translateY(-2px); }
 
     .btn-ghost {
-      background: rgba(255,255,255,0.85);
+      background: white;
       color: var(--primary);
       border: 1px solid var(--border);
       box-shadow: none;
     }
 
+    .btn-danger {
+      background: linear-gradient(135deg, #db5353, #c13f3f);
+      box-shadow: 0 12px 28px rgba(193,63,63,0.22);
+    }
+
     .hero {
       position: relative;
       overflow: hidden;
-      min-height: 92vh;
+      min-height: 78vh;
       display: flex;
       align-items: center;
       padding: 64px 0;
       background:
-        linear-gradient(180deg, rgba(10,46,92,0.62) 0%, rgba(10,46,92,0.40) 42%, rgba(244,249,255,0.95) 100%),
-        radial-gradient(circle at top right, rgba(79,182,233,0.20), transparent 30%),
-        linear-gradient(135deg, #083261 0%, #0a4b89 45%, #4fb6e9 100%);
+        linear-gradient(180deg, rgba(10,46,92,0.68) 0%, rgba(10,46,92,0.44) 45%, rgba(244,249,255,0.95) 100%),
+        radial-gradient(circle at top right, rgba(79,182,233,0.24), transparent 28%),
+        linear-gradient(135deg, #083261 0%, #0a467f 48%, #4fb6e9 100%);
     }
 
     .hero::before,
@@ -148,84 +145,90 @@
       content: "";
       position: absolute;
       border-radius: 999px;
-      filter: blur(10px);
-      opacity: 0.28;
       pointer-events: none;
+      filter: blur(10px);
+      opacity: .28;
     }
 
     .hero::before {
-      width: 340px;
-      height: 340px;
-      background: #8fe3ff;
-      top: -80px;
-      right: -80px;
+      width: 320px;
+      height: 320px;
+      background: #9be8ff;
+      top: -90px;
+      right: -70px;
     }
 
     .hero::after {
-      width: 280px;
-      height: 280px;
+      width: 260px;
+      height: 260px;
       background: #ffffff;
-      bottom: 40px;
       left: -70px;
+      bottom: 20px;
     }
 
     .hero-grid {
       position: relative;
       z-index: 1;
       display: grid;
-      grid-template-columns: 1.15fr 0.85fr;
-      gap: 30px;
+      grid-template-columns: 1.1fr 0.9fr;
+      gap: 28px;
       align-items: center;
     }
 
     .eyebrow {
       margin: 0 0 10px;
-      color: #d8f5ff;
+      color: #d8f4ff;
       font-weight: 800;
       letter-spacing: .02em;
     }
 
     .hero h1 {
       margin: 0 0 16px;
-      font-size: clamp(2.3rem, 5vw, 4.5rem);
-      line-height: 1.04;
       color: white;
-      text-shadow: 0 8px 28px rgba(0,0,0,0.22);
+      font-size: clamp(2.4rem, 5vw, 4.6rem);
+      line-height: 1.03;
+      text-shadow: 0 8px 28px rgba(0,0,0,0.20);
     }
 
     .lead {
       margin: 0 0 24px;
-      max-width: 680px;
-      font-size: 1.1rem;
       color: rgba(255,255,255,0.92);
-      text-shadow: 0 4px 18px rgba(0,0,0,0.18);
+      font-size: 1.08rem;
+      max-width: 650px;
+      text-shadow: 0 4px 18px rgba(0,0,0,0.15);
     }
 
     .hero-cta {
       display: flex;
       flex-wrap: wrap;
       gap: 14px;
-      margin-bottom: 28px;
+      margin-bottom: 24px;
     }
 
-    .hero-points {
+    .hero-badges {
       display: grid;
       grid-template-columns: repeat(3, minmax(0,1fr));
       gap: 14px;
     }
 
-    .hero-point {
-      padding: 16px;
-      border-radius: 18px;
-      background: rgba(255,255,255,0.12);
-      border: 1px solid rgba(255,255,255,0.16);
+    .badge {
+      background: rgba(0,0,0,0.30);
       backdrop-filter: blur(10px);
+      border: 1px solid rgba(255,255,255,0.15);
+      border-radius: 18px;
+      padding: 16px;
       color: white;
     }
 
-    .hero-point strong {
-      display: block;
-      margin-bottom: 4px;
+    .badge-top {
+      margin: 0 0 4px;
+      opacity: .82;
+      font-size: .9rem;
+    }
+
+    .badge-big {
+      margin: 0;
+      font-weight: 800;
       font-size: 1.05rem;
     }
 
@@ -237,20 +240,20 @@
       padding: 24px;
     }
 
-    .hero-card {
-      background: rgba(255,255,255,0.90);
-      backdrop-filter: blur(14px);
+    .hero-card h2,
+    .section-header h2,
+    .card h3 {
+      color: var(--primary);
     }
 
     .hero-card h2 {
       margin-top: 0;
       margin-bottom: 14px;
       font-size: 1.8rem;
-      color: var(--primary);
     }
 
     .checklist {
-      margin: 0 0 20px;
+      margin: 0 0 18px;
       padding-left: 18px;
     }
 
@@ -258,18 +261,17 @@
 
     .callout {
       padding: 16px;
-      background: var(--accent-soft);
       border-radius: 16px;
+      background: var(--accent-soft);
     }
 
     .callout strong {
       display: block;
       margin-bottom: 6px;
-      color: var(--primary);
     }
 
     .section { padding: 78px 0; }
-    .section-alt { background: rgba(255,255,255,0.5); }
+    .section-alt { background: rgba(255,255,255,0.55); }
 
     .section-header {
       max-width: 760px;
@@ -278,70 +280,49 @@
 
     .section-header h2 {
       margin: 0 0 10px;
-      font-size: clamp(1.8rem, 3vw, 2.5rem);
-      color: var(--primary);
+      font-size: clamp(1.8rem, 3vw, 2.4rem);
     }
 
-    .section-header p {
-      margin: 0;
+    .section-header p,
+    .card p,
+    .card li,
+    .muted {
       color: var(--muted);
-      font-size: 1.05rem;
     }
 
-    .grid {
-      display: grid;
-      gap: 20px;
-    }
-
+    .grid { display: grid; gap: 20px; }
     .cards { grid-template-columns: repeat(3, minmax(0, 1fr)); }
-    .pricing { grid-template-columns: repeat(3, minmax(0, 1fr)); }
-    .faq { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    .faq-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    .karaoke-layout { grid-template-columns: 1.05fr 0.95fr; align-items: start; }
 
     .icon-bubble {
       width: 52px;
       height: 52px;
+      border-radius: 16px;
       display: grid;
       place-items: center;
-      border-radius: 16px;
       background: linear-gradient(135deg, var(--accent-soft), white);
-      color: var(--primary);
-      font-size: 1.4rem;
       margin-bottom: 14px;
-    }
-
-    .card h3 {
-      margin: 0 0 10px;
-      color: var(--primary);
-      font-size: 1.28rem;
-    }
-
-    .card p {
-      margin: 0;
-      color: var(--muted);
+      font-size: 1.35rem;
     }
 
     .bullet {
       margin: 14px 0 0;
       padding-left: 18px;
-      color: var(--muted);
     }
 
     .bullet li { margin-bottom: 8px; }
 
     .steps {
-      list-style: none;
-      margin: 0;
-      padding: 0;
       display: grid;
-      grid-template-columns: repeat(4, minmax(0,1fr));
+      grid-template-columns: repeat(4, minmax(0, 1fr));
       gap: 16px;
     }
 
     .step {
-      position: relative;
       padding: 22px;
-      background: white;
       border-radius: 22px;
+      background: white;
       border: 1px solid var(--border);
       box-shadow: var(--shadow);
     }
@@ -358,61 +339,133 @@
       margin-bottom: 14px;
     }
 
-    .price-card {
-      position: relative;
+    .karaoke-panel {
+      position: sticky;
+      top: 94px;
+    }
+
+    .field {
+      margin-bottom: 16px;
+    }
+
+    .field label {
+      display: block;
+      margin-bottom: 8px;
+      font-weight: 700;
+      color: var(--primary);
+    }
+
+    .input,
+    .select {
+      width: 100%;
+      padding: 13px 14px;
+      border: 1px solid rgba(10,46,92,0.14);
+      border-radius: 14px;
+      background: white;
+      color: var(--text);
+    }
+
+    .status-box {
+      margin-top: 16px;
+      padding: 14px 16px;
+      border-radius: 14px;
+      background: #eef7ff;
+      color: var(--primary);
+      font-weight: 700;
+    }
+
+    .now-playing {
+      display: grid;
+      gap: 14px;
+    }
+
+    .song-card {
+      padding: 16px;
+      border-radius: 18px;
+      background: #f8fbff;
+      border: 1px solid var(--border);
+    }
+
+    .song-title {
+      margin: 0 0 6px;
+      color: var(--primary);
+      font-size: 1.1rem;
+    }
+
+    .song-meta {
+      margin: 0;
+      color: var(--muted);
+      font-size: .96rem;
+    }
+
+    .player-shell {
+      margin-top: 18px;
+      border-radius: 20px;
       overflow: hidden;
+      border: 1px solid var(--border);
+      background: #000;
+      aspect-ratio: 16 / 9;
     }
 
-    .price-card.featured {
-      border: 1px solid rgba(79,182,233,0.45);
-      transform: translateY(-6px);
+    .player-shell iframe {
+      width: 100%;
+      height: 100%;
+      border: 0;
+      display: block;
     }
 
-    .price-tag {
-      margin: 14px 0 10px;
-      font-size: 2rem;
+    .queue-list {
+      display: grid;
+      gap: 12px;
+      margin-top: 16px;
+    }
+
+    .queue-item {
+      display: flex;
+      justify-content: space-between;
+      gap: 16px;
+      padding: 14px 16px;
+      border-radius: 16px;
+      background: white;
+      border: 1px solid var(--border);
+    }
+
+    .queue-name {
+      margin: 0 0 4px;
       font-weight: 800;
       color: var(--primary);
     }
 
-    .price-note {
-      font-size: .95rem;
+    .queue-song {
+      margin: 0;
       color: var(--muted);
-      margin-bottom: 16px;
+    }
+
+    .queue-position {
+      flex-shrink: 0;
+      font-weight: 800;
+      color: var(--accent);
     }
 
     .pill {
       display: inline-flex;
       align-items: center;
-      gap: 8px;
       padding: 8px 12px;
       border-radius: 999px;
       background: var(--accent-soft);
       color: var(--primary);
-      font-weight: 700;
+      font-weight: 800;
       font-size: .9rem;
-      margin-bottom: 12px;
+      margin-bottom: 14px;
     }
 
-    .contact-grid {
-      display: grid;
-      grid-template-columns: 1fr 0.9fr;
-      gap: 20px;
-    }
-
-    .info-list {
-      list-style: none;
-      margin: 0;
-      padding: 0;
-    }
-
-    .info-list li {
-      padding: 10px 0;
-      border-bottom: 1px solid var(--border);
+    .empty {
+      padding: 16px;
+      border-radius: 16px;
+      background: #f8fbff;
+      border: 1px dashed rgba(10,46,92,0.18);
       color: var(--muted);
     }
-
-    .info-list strong { color: var(--primary); }
 
     .faq-item {
       background: white;
@@ -424,40 +477,18 @@
 
     .faq-item summary {
       cursor: pointer;
-      font-weight: 700;
+      font-weight: 800;
       color: var(--primary);
     }
 
     .faq-item p {
       margin: 12px 0 0;
-      color: var(--muted);
     }
 
-    .cta-box {
-      text-align: center;
-      background: linear-gradient(135deg, rgba(10,46,92,0.98), rgba(79,182,233,0.95));
-      color: white;
-      padding: 34px;
-      border-radius: 28px;
-      box-shadow: 0 20px 40px rgba(10,46,92,0.18);
-    }
-
-    .cta-box h2 {
-      margin: 0 0 10px;
-      font-size: clamp(1.8rem, 3vw, 2.6rem);
-    }
-
-    .cta-box p {
-      margin: 0 0 20px;
-      color: rgba(255,255,255,0.92);
-    }
-
-    .cta-box .btn { background: white; color: var(--primary); }
-
-    .site-footer {
-      padding: 30px 0 40px;
+    .footer {
+      padding: 34px 0 42px;
       border-top: 1px solid var(--border);
-      background: rgba(255,255,255,0.65);
+      background: rgba(255,255,255,0.7);
     }
 
     .footer-inner {
@@ -474,46 +505,59 @@
       flex-wrap: wrap;
     }
 
-    .footer-links a { text-decoration: none; }
+    .footer-links a {
+      text-decoration: none;
+      color: var(--muted);
+    }
 
     @media (max-width: 980px) {
       .hero-grid,
-      .contact-grid,
-      .pricing,
       .cards,
-      .faq,
-      .steps {
+      .steps,
+      .faq-grid,
+      .karaoke-layout,
+      .hero-badges {
         grid-template-columns: 1fr;
       }
 
-      .hero-points {
-        grid-template-columns: 1fr;
-      }
-
-      .nav-toggle {
-        display: inline-flex;
-      }
-
-      .nav {
-        position: relative;
+      .karaoke-panel {
+        position: static;
       }
 
       .nav-list {
-        display: none;
-        position: absolute;
-        right: 0;
-        top: 56px;
-        width: min(260px, calc(100vw - 32px));
+        gap: 12px;
+        flex-wrap: wrap;
+        justify-content: flex-end;
+      }
+    }
+
+    @media (max-width: 700px) {
+      .header-inner {
         flex-direction: column;
-        align-items: stretch;
-        background: white;
-        border: 1px solid var(--border);
-        border-radius: 18px;
-        box-shadow: var(--shadow);
-        padding: 12px;
+        align-items: flex-start;
       }
 
-      .nav-list.is-open { display: flex; }
+      .nav-list {
+        justify-content: flex-start;
+      }
+
+      .hero {
+        min-height: auto;
+        padding: 52px 0;
+      }
+
+      .hero-cta {
+        flex-direction: column;
+        align-items: stretch;
+      }
+
+      .btn {
+        width: 100%;
+      }
+
+      .queue-item {
+        flex-direction: column;
+      }
     }
   </style>
 </head>
@@ -522,19 +566,15 @@
     <div class="container header-inner">
       <a class="brand" href="#top" aria-label="Til toppen">
         <span class="brand-mark">♫</span>
-        <span>Nordintel Karaoke</span>
+        <span>Nordintel Karaoke Stand</span>
       </a>
 
-      <nav class="nav" aria-label="Hovedmeny">
-        <button class="nav-toggle" id="navToggle" type="button" aria-expanded="false" aria-controls="navMenu">Meny</button>
-        <ul class="nav-list" id="navMenu">
-          <li><a href="#tjenester">Tjenester</a></li>
-          <li><a href="#pakker">Pakker</a></li>
-          <li><a href="#slik">Slik funker det</a></li>
-          <li><a href="#faq">Spørsmål</a></li>
-          <li><a class="btn" href="#kontakt">Kontakt</a></li>
-        </ul>
-      </nav>
+      <ul class="nav-list" aria-label="Hovedmeny">
+        <li><a href="#karaoke">Karaoke</a></li>
+        <li><a href="#hvordan">Hvordan</a></li>
+        <li><a href="#faq">Spørsmål</a></li>
+        <li><a class="btn" href="#karaoke">Start her</a></li>
+      </ul>
     </div>
   </header>
 
@@ -542,165 +582,167 @@
     <section class="hero">
       <div class="container hero-grid">
         <div>
-          <p class="eyebrow">Karaoke for skolekvelder, bursdager og lokale arrangement i Bodø</p>
-          <h1>Skru opp stemninga med en enkel karaoke kveld</h1>
-          <p class="lead">Nordintel Karaoke gjør det lett å lage en morsom kveld med lyd, skjerm, mikrofoner og oppsett som er enkelt å bruke. Passer for små arrangement, elevkvelder og lokale events.</p>
+          <p class="eyebrow">Kom innom standen vår og syng med oss</p>
+          <h1>Karaoke på stand, rett i nettleseren</h1>
+          <p class="lead">Denne nettsiden er laget for at folk som kommer innom standen deres enkelt skal kunne velge en sang, skrive inn navn og bli satt i kø. Når dere trykker start, åpnes karaokevideoen på skjermen.</p>
 
           <div class="hero-cta">
-            <a class="btn" href="#kontakt">Book forespørsel</a>
-            <a class="btn btn-ghost" href="#pakker">Se pakker</a>
+            <a class="btn" href="#karaoke">Velg sang</a>
+            <a class="btn btn-ghost" href="#hvordan">Se hvordan det funker</a>
           </div>
 
-          <div class="hero-points">
-            <div class="hero-point">
-              <strong>Enkelt oppsett</strong>
-              <span>Det skal være lett å komme i gang.</span>
+          <div class="hero-badges">
+            <div class="badge">
+              <p class="badge-top">Bruk</p>
+              <p class="badge-big">Perfekt for stand</p>
             </div>
-            <div class="hero-point">
-              <strong>For ungdom og bedrifter</strong>
-              <span>Passer både avslappa og mer formelle kvelder.</span>
+            <div class="badge">
+              <p class="badge-top">Kø</p>
+              <p class="badge-big">Navn og sangvalg</p>
             </div>
-            <div class="hero-point">
-              <strong>Lokalt i Bodø</strong>
-              <span>Rask kontakt og enkel avtale.</span>
+            <div class="badge">
+              <p class="badge-top">Start</p>
+              <p class="badge-big">Spill av på skjerm</p>
             </div>
           </div>
         </div>
 
         <aside class="card hero-card">
-          <h2>Hvorfor karaoke?</h2>
+          <h2>Hva siden gjør</h2>
           <ul class="checklist">
-            <li>Skaper liv og energi med en gang</li>
-            <li>Funker bra for grupper som ikke kjenner hverandre så godt</li>
-            <li>Gir innhold til en kveld uten masse planlegging</li>
-            <li>Kan tilpasses både liten og større gruppe</li>
+            <li>Lar besøkende skrive inn navn</li>
+            <li>Lar dem velge sang fra en ferdig liste</li>
+            <li>Legger dem i kø på skjermen</li>
+            <li>Åpner karaokevideo når dere starter neste</li>
           </ul>
           <div class="callout">
-            <strong>Mest viktig</strong>
-            <span>Tydelig lyd, enkel styring og lav terskel for å bli med.</span>
+            <strong>Viktig å vite</strong>
+            <span>Denne løsningen bruker YouTube karaokevideoer i en enkel avspiller. Den passer bra til elevstand og GitHub Pages.</span>
           </div>
         </aside>
       </div>
     </section>
 
-    <section class="section" id="tjenester">
+    <section class="section" id="karaoke">
       <div class="container">
         <header class="section-header">
-          <h2>Hva vi tilbyr</h2>
-          <p>Dette er laget som en enkel og ryddig karaoke side som kan hostes rett i GitHub Pages uten backend.</p>
+          <h2>Karaoke kontroll</h2>
+          <p>Her kan folk skrive inn navn og velge sang. Nederst ser dere køen. På høyre side får dere avspilling av neste sang.</p>
         </header>
 
-        <div class="grid cards">
-          <article class="card">
-            <div class="icon-bubble">🎤</div>
-            <h3>Karaoke oppsett</h3>
-            <p>Vi gjør klart en løsning med mikrofoner, skjerm og enkel styring så folk kan komme raskt i gang.</p>
-            <ul class="bullet">
-              <li>Passer mindre arrangement</li>
-              <li>Enkel start</li>
-              <li>Lite stress</li>
-            </ul>
-          </article>
+        <div class="grid karaoke-layout">
+          <div class="card">
+            <span class="pill">Legg til deltaker</span>
+            <form id="karaokeForm">
+              <div class="field">
+                <label for="participantName">Navn</label>
+                <input class="input" id="participantName" name="participantName" type="text" placeholder="Skriv navnet ditt" required />
+              </div>
 
-          <article class="card">
-            <div class="icon-bubble">🎶</div>
-            <h3>Stemning og aktivitet</h3>
-            <p>Karaoke er en aktivitet som både fyller tid og gjør at arrangementet føles mer levende.</p>
-            <ul class="bullet">
-              <li>Lav terskel</li>
-              <li>Morsomt for grupper</li>
-              <li>Passer mange typer kvelder</li>
-            </ul>
-          </article>
+              <div class="field">
+                <label for="songSelect">Velg sang</label>
+                <select class="select" id="songSelect" name="songSelect"></select>
+              </div>
 
-          <article class="card">
-            <div class="icon-bubble">✨</div>
-            <h3>Rent og moderne uttrykk</h3>
-            <p>Designet er laget for å se enkelt, moderne og troverdig ut på mobil og pc.</p>
-            <ul class="bullet">
-              <li>Mobilvennlig</li>
-              <li>Ryddig tekst</li>
-              <li>Tydelige knapper</li>
-            </ul>
-          </article>
+              <div style="display:flex; gap:12px; flex-wrap:wrap;">
+                <button class="btn" type="submit">Legg i kø</button>
+                <button class="btn btn-ghost" type="button" id="clearQueueBtn">Tøm kø</button>
+              </div>
+            </form>
+
+            <div class="status-box" id="queueStatus">Ingen i kø enda. Legg til første sanger.</div>
+
+            <div style="margin-top:22px;">
+              <h3>Kø</h3>
+              <div class="queue-list" id="queueList">
+                <div class="empty">Køen er tom akkurat nå.</div>
+              </div>
+            </div>
+          </div>
+
+          <aside class="card karaoke-panel">
+            <span class="pill">Spilles nå</span>
+            <div class="now-playing">
+              <div class="song-card">
+                <h3 class="song-title" id="nowTitle">Ingen sang startet enda</h3>
+                <p class="song-meta" id="nowMeta">Legg noen i kø og trykk start neste.</p>
+              </div>
+
+              <div style="display:flex; gap:12px; flex-wrap:wrap;">
+                <button class="btn" id="startNextBtn" type="button">Start neste</button>
+                <button class="btn btn-danger" id="removeCurrentBtn" type="button">Fjern nåværende</button>
+              </div>
+
+              <div class="player-shell">
+                <iframe
+                  id="karaokePlayer"
+                  src="https://www.youtube.com/embed?listType=playlist&list="
+                  title="Karaoke avspiller"
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                  referrerpolicy="strict-origin-when-cross-origin"
+                  allowfullscreen>
+                </iframe>
+              </div>
+            </div>
+          </aside>
         </div>
       </div>
     </section>
 
-    <section class="section section-alt" id="pakker">
+    <section class="section section-alt" id="hvordan">
       <div class="container">
         <header class="section-header">
-          <h2>Eksempel på pakker</h2>
-          <p>Disse er bare plassholdere. Dere kan bytte tekst og priser senere.</p>
-        </header>
-
-        <div class="grid pricing">
-          <article class="card price-card">
-            <span class="pill">Liten kveld</span>
-            <h3>Mini</h3>
-            <div class="price-tag">Fra 1 490 kr</div>
-            <p class="price-note">For mindre grupper og korte arrangement.</p>
-            <ul class="bullet">
-              <li>Grunnleggende oppsett</li>
-              <li>Enkel levering</li>
-              <li>Passer små lokaler</li>
-            </ul>
-          </article>
-
-          <article class="card price-card featured">
-            <span class="pill">Mest valgt</span>
-            <h3>Standard</h3>
-            <div class="price-tag">Fra 2 490 kr</div>
-            <p class="price-note">For arrangement som vil ha litt mer energi og bedre flyt.</p>
-            <ul class="bullet">
-              <li>Mer komplett oppsett</li>
-              <li>Passer elevkvelder og events</li>
-              <li>God balanse mellom pris og innhold</li>
-            </ul>
-          </article>
-
-          <article class="card price-card">
-            <span class="pill">Større kveld</span>
-            <h3>Event</h3>
-            <div class="price-tag">Etter avtale</div>
-            <p class="price-note">For større opplegg som trenger mer planlegging.</p>
-            <ul class="bullet">
-              <li>Tilpasses behov</li>
-              <li>Flere detaljer kan avtales</li>
-              <li>Bedre for større grupper</li>
-            </ul>
-          </article>
-        </div>
-      </div>
-    </section>
-
-    <section class="section" id="slik">
-      <div class="container">
-        <header class="section-header">
-          <h2>Slik funker det</h2>
-          <p>Hele poenget er at det skal være enkelt å forstå og enkelt å bestille.</p>
+          <h2>Slik bruker dere den på stand</h2>
+          <p>Denne delen er laget for at dere skal kunne åpne siden på pc-en deres og bruke den med en gang.</p>
         </header>
 
         <div class="steps">
           <article class="step">
             <div class="step-number">1</div>
-            <h3>Send forespørsel</h3>
-            <p>Dere sier når arrangementet er, hvor det er og omtrent hvor mange som kommer.</p>
+            <h3>Åpne nettsiden</h3>
+            <p>Ha siden oppe på pc-en som står på standen eller på skjermen dere bruker.</p>
           </article>
           <article class="step">
             <div class="step-number">2</div>
-            <h3>Vi avtaler opplegg</h3>
-            <p>Vi finner en løsning som passer størrelse, stemning og budsjett.</p>
+            <h3>Velg navn og sang</h3>
+            <p>La folk skrive inn navn og velge blant sangene som ligger i lista.</p>
           </article>
           <article class="step">
             <div class="step-number">3</div>
-            <h3>Oppsett</h3>
-            <p>Karaoke delen gjøres klar så det blir lett å starte når folk kommer.</p>
+            <h3>Bygg kø</h3>
+            <p>Alle som melder seg på vises i køen med plassering og sang.</p>
           </article>
           <article class="step">
             <div class="step-number">4</div>
-            <h3>Kvelden er i gang</h3>
-            <p>Folk synger, ler og får en kveld som føles mye mindre stiv.</p>
+            <h3>Trykk start neste</h3>
+            <p>Da åpnes karaokevideoen til neste person på skjermen dere bruker.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="fordeler">
+      <div class="container">
+        <header class="section-header">
+          <h2>Hvorfor dette funker bra på stand</h2>
+          <p>Folk stopper lettere når det skjer noe. Karaoke gjør standen mer levende og gir dere en aktivitet som trekker oppmerksomhet.</p>
+        </header>
+
+        <div class="grid cards">
+          <article class="card">
+            <div class="icon-bubble">🎤</div>
+            <h3>Lav terskel</h3>
+            <p>Folk skjønner med en gang hva de skal gjøre, og det er lett å bli med.</p>
+          </article>
+          <article class="card">
+            <div class="icon-bubble">📺</div>
+            <h3>Synlig aktivitet</h3>
+            <p>Musikk og skjerm gjør at standen føles mer aktiv og trekker flere bort.</p>
+          </article>
+          <article class="card">
+            <div class="icon-bubble">⚡</div>
+            <h3>Enkel å kjøre</h3>
+            <p>Siden fungerer som en enkel kontrollside uten backend og kan hostes rett i GitHub Pages.</p>
           </article>
         </div>
       </div>
@@ -710,84 +752,178 @@
       <div class="container">
         <header class="section-header">
           <h2>Vanlige spørsmål</h2>
-          <p>Enkel info som gjør at folk føler seg tryggere før de tar kontakt.</p>
+          <p>Dette er greit å vite før dere bruker siden på arrangementet.</p>
         </header>
 
-        <div class="grid faq">
+        <div class="grid faq-grid">
           <details class="faq-item">
-            <summary>Må vi kunne noe teknisk?</summary>
-            <p>Nei, siden er laget for at det skal føles enkelt. Dere kan også skrive at dere hjelper med oppstart hvis dere faktisk gjør det.</p>
+            <summary>Funker dette i GitHub Pages?</summary>
+            <p>Ja. Alt ligger i én HTML-fil med vanlig CSS og JavaScript. Det gjør den enkel å laste opp i repoet deres.</p>
           </details>
           <details class="faq-item">
-            <summary>Passer dette for skolearrangement?</summary>
-            <p>Ja, teksten på siden er laget så det passer elevkvelder, bursdager og lokale events.</p>
+            <summary>Kan vi bytte sangene?</summary>
+            <p>Ja. Sanglista ligger i JavaScript og kan byttes når som helst.</p>
           </details>
           <details class="faq-item">
-            <summary>Kan vi endre prisene senere?</summary>
-            <p>Ja. Alt er bare vanlig HTML, så dere kan bytte tekst og priser direkte i fila.</p>
+            <summary>Blir køen lagret?</summary>
+            <p>I denne versjonen lever køen bare mens siden er åpen. Dere kan senere utvide med lagring i nettleseren hvis dere vil.</p>
           </details>
           <details class="faq-item">
-            <summary>Funker siden i GitHub Pages?</summary>
-            <p>Ja. Dette er en statisk side i én fil, så den kan lastes opp direkte i repoet deres.</p>
+            <summary>Trenger vi backend?</summary>
+            <p>Nei. Denne løsningen er laget for å være så enkel som mulig og passe rett inn i GitHub.</p>
           </details>
-        </div>
-      </div>
-    </section>
-
-    <section class="section" id="kontakt">
-      <div class="container">
-        <div class="contact-grid">
-          <div class="card">
-            <h3>Kontakt</h3>
-            <p style="margin-bottom: 16px;">Bytt ut tekst, telefon og e post med deres egne detaljer.</p>
-            <ul class="info-list">
-              <li><strong>E post:</strong> nordintel25@gmail.com</li>
-              <li><strong>Telefon:</strong> 451 47 254</li>
-              <li><strong>Område:</strong> Bodø</li>
-              <li><strong>Svar:</strong> Innen 48 timer</li>
-            </ul>
-          </div>
-
-          <div class="cta-box">
-            <h2>Klar for karaoke kveld?</h2>
-            <p>Ta kontakt for pris, opplegg og ledige datoer.</p>
-            <a class="btn" href="mailto:nordintel25@gmail.com?subject=Forespørsel%20om%20karaoke">Send forespørsel</a>
-          </div>
         </div>
       </div>
     </section>
   </main>
 
-  <footer class="site-footer">
+  <footer class="footer">
     <div class="container footer-inner">
-      <p>© <span id="year"></span> Nordintel Karaoke</p>
+      <p>© <span id="year"></span> Nordintel Karaoke Stand</p>
       <div class="footer-links">
         <a href="#top">Til toppen</a>
-        <a href="#kontakt">Kontakt</a>
+        <a href="#karaoke">Karaoke</a>
       </div>
     </div>
   </footer>
 
   <script>
+    const songs = [
+      {
+        title: "Dancing Queen",
+        artist: "ABBA",
+        youtubeId: "xFrGuyw1V8s"
+      },
+      {
+        title: "Take On Me",
+        artist: "a-ha",
+        youtubeId: "djV11Xbc914"
+      },
+      {
+        title: "I Want It That Way",
+        artist: "Backstreet Boys",
+        youtubeId: "4fndeDfaWCg"
+      },
+      {
+        title: "Someone Like You",
+        artist: "Adele",
+        youtubeId: "hLQl3WQQoQ0"
+      },
+      {
+        title: "Shallow",
+        artist: "Lady Gaga og Bradley Cooper",
+        youtubeId: "bo_efYhYU2A"
+      },
+      {
+        title: "Let It Go",
+        artist: "Frozen",
+        youtubeId: "L0MK7qz13bU"
+      }
+    ];
+
+    const queue = [];
+    let currentSinger = null;
+
     const yearEl = document.getElementById("year");
-    if (yearEl) yearEl.textContent = new Date().getFullYear();
+    const songSelect = document.getElementById("songSelect");
+    const karaokeForm = document.getElementById("karaokeForm");
+    const participantName = document.getElementById("participantName");
+    const queueList = document.getElementById("queueList");
+    const queueStatus = document.getElementById("queueStatus");
+    const nowTitle = document.getElementById("nowTitle");
+    const nowMeta = document.getElementById("nowMeta");
+    const karaokePlayer = document.getElementById("karaokePlayer");
+    const startNextBtn = document.getElementById("startNextBtn");
+    const removeCurrentBtn = document.getElementById("removeCurrentBtn");
+    const clearQueueBtn = document.getElementById("clearQueueBtn");
 
-    const toggle = document.getElementById("navToggle");
-    const menu = document.getElementById("navMenu");
+    if (yearEl) {
+      yearEl.textContent = new Date().getFullYear();
+    }
 
-    if (toggle && menu) {
-      toggle.addEventListener("click", () => {
-        const isOpen = menu.classList.toggle("is-open");
-        toggle.setAttribute("aria-expanded", String(isOpen));
-      });
-
-      menu.addEventListener("click", (e) => {
-        const link = e.target.closest("a");
-        if (!link) return;
-        menu.classList.remove("is-open");
-        toggle.setAttribute("aria-expanded", "false");
+    function populateSongs() {
+      songs.forEach((song, index) => {
+        const option = document.createElement("option");
+        option.value = String(index);
+        option.textContent = `${song.title} · ${song.artist}`;
+        songSelect.appendChild(option);
       });
     }
+
+    function renderQueue() {
+      queueList.innerHTML = "";
+
+      if (!queue.length) {
+        queueList.innerHTML = '<div class="empty">Køen er tom akkurat nå.</div>';
+        queueStatus.textContent = currentSinger ? "Ingen flere i kø akkurat nå." : "Ingen i kø enda. Legg til første sanger.";
+        return;
+      }
+
+      queue.forEach((item, index) => {
+        const row = document.createElement("div");
+        row.className = "queue-item";
+        row.innerHTML = `
+          <div>
+            <p class="queue-name">${item.name}</p>
+            <p class="queue-song">${item.song.title} · ${item.song.artist}</p>
+          </div>
+          <div class="queue-position">#${index + 1}</div>
+        `;
+        queueList.appendChild(row);
+      });
+
+      queueStatus.textContent = `${queue.length} i kø akkurat nå.`;
+    }
+
+    function updateCurrentView() {
+      if (!currentSinger) {
+        nowTitle.textContent = "Ingen sang startet enda";
+        nowMeta.textContent = "Legg noen i kø og trykk start neste.";
+        karaokePlayer.src = "https://www.youtube.com/embed?listType=playlist&list=";
+        return;
+      }
+
+      nowTitle.textContent = `${currentSinger.song.title}`;
+      nowMeta.textContent = `${currentSinger.name} synger · ${currentSinger.song.artist}`;
+      karaokePlayer.src = `https://www.youtube.com/embed/${currentSinger.song.youtubeId}?autoplay=1&rel=0`;
+    }
+
+    karaokeForm.addEventListener("submit", (e) => {
+      e.preventDefault();
+
+      const name = participantName.value.trim();
+      const selectedIndex = Number(songSelect.value);
+      const song = songs[selectedIndex];
+
+      if (!name || !song) return;
+
+      queue.push({ name, song });
+      karaokeForm.reset();
+      songSelect.value = "0";
+      renderQueue();
+      participantName.focus();
+    });
+
+    startNextBtn.addEventListener("click", () => {
+      if (!queue.length) return;
+      currentSinger = queue.shift();
+      renderQueue();
+      updateCurrentView();
+    });
+
+    removeCurrentBtn.addEventListener("click", () => {
+      currentSinger = null;
+      updateCurrentView();
+    });
+
+    clearQueueBtn.addEventListener("click", () => {
+      queue.length = 0;
+      renderQueue();
+    });
+
+    populateSongs();
+    renderQueue();
+    updateCurrentView();
   </script>
 </body>
 </html>
